@@ -1,0 +1,48 @@
+<!--
+  @description       : 
+  @author            : Salesforce Consultancy
+  @group             : 
+  @last modified on  : 09-28-2022
+  @last modified by  : Salesforce Consultancy
+-->
+<template>
+    <div class="slds-grid slds-grid_vertical" >
+        <div class="slds-box messenger-title"> 
+           
+                    <div class="slds-grid slds-grid_align-spread">
+                    <div class="slds-col">
+                         <lightning-icon icon-name="utility:chat" ></lightning-icon>
+                    </div>
+                    <div class="slds-col">
+                         <lightning-input type="search" label="Enter message here " variant="label-hidden" placeholder="Search In Messages" ></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-icon icon-name="utility:settings" size="small" class="slds-p-horizontal_small"></lightning-icon>
+                        <lightning-icon icon-name="utility:down" size="small" ></lightning-icon>
+                    </div>
+                    </div>
+           
+        </div>
+        <div class="slds-box">
+            <div class="message-parent-container">
+                <div class="message-container ">
+                    <!-- Message List -->    
+                    Child 1
+                </div>
+              
+            </div>
+        </div>
+        <div class="slds-box"> 
+            <!-- Message type Container -->
+            <div class="slds-grid">
+                 
+                <div class="message-input"> 
+                    <lightning-input type="text" label="Enter message here " variant="label-hidden" class="message-input-control" ></lightning-input>
+                </div>
+                <div  >
+                     <lightning-icon icon-name="utility:send" variant="success " class="slds-p-horizontal_small " ></lightning-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,26 @@
+.message-parent-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+  }
+  .icon-color {
+      fill: red;
+  }
+  .message-container {
+    min-height:200px;
+   
+  }
+  
+  .message-input {
+      width: 95%;
+  }
+  
+  .message-input-control {
+      border-radius: 70px;
+  }
+  .messenger-title{
+      background: cornflowerblue;
+  }

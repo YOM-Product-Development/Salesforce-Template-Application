@@ -1,0 +1,134 @@
+<!--
+  @description       : 
+  @author            : Salesforce Consultancy
+  @group             : 
+  @last modified on  : 10-02-2022
+  @last modified by  : Salesforce Consultancy
+-->
+<template>
+    <lightning-card>
+        <!-- Title Section -->
+        <h3 slot="title">
+            <lightning-icon icon-name="doctype:folder" size="large" class="slds-p-right_small"></lightning-icon>
+            <span>  {title}  </span>
+                
+        </h3>
+        <!-- Action Section -->
+        <div slot="actions">
+            <div class="slds-grid">
+                <div if:true={isFilter}>
+                    <lightning-input type ="search" 
+                                    label="search" 
+                                    variant="label-hidden" 
+                                    placeholder="Search Images by name"
+                                    class="slds-p-right_small"></lightning-input>
+        
+                </div>
+                <div if:true={isFilter}>
+                    <lightning-combobox
+                                    name="fileTypes"
+                                    label="File Types"
+                                    value={value}
+                                    placeholder="Select File Types"
+                                    options={imagesSupported}
+                                    onchange={handleFilteronImageType} 
+                                    class="slds-p-right_large" 
+                                    variant="label-hidden"></lightning-combobox>
+        
+                </div>
+                <div>
+                    <!-- Filter Controls -->
+                    <lightning-button-icon  icon-name="utility:settings" class="slds-p-right_small" ></lightning-button-icon>
+                    <lightning-button-icon  icon-name="utility:refresh"  class="slds-p-right_small" onclick={onRefresh}> ></lightning-button-icon>
+                    <!-- Filter Button -->
+                    <lightning-button-icon  icon-name="utility:filterList"  class="slds-p-right_small" if:true={isFilter} variant="brand" onclick={onApplyFilter}></lightning-button-icon>
+                    <lightning-button-icon  icon-name="utility:filterList"  class="slds-p-right_small" if:false={isFilter} onclick={onApplyFilter}></lightning-button-icon>
+                    <!-- Upload Button -->
+                    <lightning-button-icon  icon-name="utility:upload"   class="slds-p-right_small" if:true={isUpload} variant="brand" onclick={onUploadMode}></lightning-button-icon>        
+                    <lightning-button-icon  icon-name="utility:upload"   class="slds-p-right_small" if:false={isUpload} onclick={onUploadMode}></lightning-button-icon>        
+                </div>
+            </div>
+
+       </div>
+       <!-- Footer Section -->
+        <div slot="footer">
+        </div>
+
+        <!-- Image Main Container -->
+        <div class="slds-p-horizontal_small image-main-container   ">
+            <div class="slds-grid slds-wrap" >
+                <template for:each={images} for:item="image" for:index="imageIndex">
+                    <div key={image.Id} class="slds-p-around_small" if:true={image.isImage}>
+                        <div class="image-container">
+                            <template if:true={image.imageURL}>
+                                <div class="slds-grid slds-grid_vertical">
+                                    <div class="slds-col">
+                                            <span if:false={image.Description}>{image.Title} </span>
+                                            <span if:true={image.Description}>{image.Description} </span>
+                                    </div>
+                                    <div class="slds-col" >
+                                        <!-- show Image-->
+                                        <img src={image.imageURL} class ="image" title={image.Title} if:false={image.Description} 
+                                                onmouseover={onMounseOnImage} 
+                                                onmouseleave={onMounseLeaveImage}
+                                                onmousedown={onMounseClickOnImage}
+                                                data-index={imageIndex}/> 
+                                        <img src={image.imageURL} class ="image" title={image.Description} if:true={image.Description} 
+                                                onmouseover={onMounseOnImage} 
+                                                onmouseleave={onMounseLeaveImage}
+                                                onmousedoublelick={onMounseClickOnImage}
+                                                data-index={imageIndex}/> 
+                                    </div>
+                                    <div class="slds-col" if:true={image.isSelected}>
+                                        <div class="slds-grid slds-grid_align-spread">
+                                            <div class="slds-grid slds-grid_align-spread slds-p-vertical_small" >
+                                                <!-- Show Tabs + keywords -->
+                                                <div class="slds-col">
+                                                    <lightning-pill-container items={image.keywords} if:true={image.keywords}></lightning-pill-container>
+                                                </div>
+                                                <!-- Show Add button for Tabs + keywords -->
+                                                 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>                     
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+    <!-- Edit Dialog -->
+    <!-- modal start -->      
+    <template if:true={editDocument}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+        <!-- modal header start -->
+        <header class="slds-modal__header">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                <lightning-icon icon-name="utility:close"
+                alternative-text="close"
+                variant="inverse"
+                size="small" ></lightning-icon>
+                <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit File {selectedDocument.Title}. {selectedDocument.FileExtension}</h2>
+        </header>
+
+        <!-- modal body start -->
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <p>Modal/Popup in Lightning Web Component (LWC) Demo</p>
+        </div>
+
+        <!-- modal footer start-->
+        <footer class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Cancel</button>
+        </footer>
+
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- modal end -->
+</template>

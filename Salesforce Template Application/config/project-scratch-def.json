@@ -1,0 +1,22 @@
+{
+  "orgName": "YOM Associates",
+  "edition": "Developer",
+  "features": ["EnableSetPasswordInApi","AuthorApex" ,"FieldAuditTrail" ,"DebugApex","ForceComPlatform",
+                  "Workflow","Communities","ProcessBuilder","RecordTypes","ServiceUser","Sites","MultiCurrency",
+                  "PlatformEncryption" ,"AddCustomObjects:20"
+              ],
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
+    },
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
+    }
+  }
+}
